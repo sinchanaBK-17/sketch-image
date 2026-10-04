@@ -40,7 +40,7 @@ export function processSketch(src: HTMLCanvasElement): string {
   const img = ctx.getImageData(0, 0, c.width, c.height);
   const d = img.data;
   for (let i = 0; i < d.length; i += 4) {
-    const g = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
+    const g = 0.299 * d[i]! + 0.587 * d[i + 1]! + 0.114 * d[i + 2]!;
     const v = g < 200 ? Math.max(0, g - 60) : 255;
     d[i] = d[i + 1] = d[i + 2] = v;
   }
@@ -49,4 +49,4 @@ export function processSketch(src: HTMLCanvasElement): string {
 }
 
 /** If a Render (Python + OpenCV) backend URL is configured, use it. */
-export const RENDER_API_URL = (import.meta.env.VITE_RENDER_API_URL as string | undefined)?.replace(/\/$/, "");
+export const RENDER_API_URL = (import.meta.env['VITE_RENDER_API_URL'] as string | undefined)?.replace(/\/$/, "");

@@ -19,7 +19,7 @@ export const generateFromSketch = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    const key = process.env.LOVABLE_API_KEY;
+    const key = process.env['LOVABLE_API_KEY'];
     if (!key) throw new Error("AI service is not configured.");
     const text = `Turn this sketch into a finished image. Keep the composition and shapes of the sketch. Style: ${STYLE_PROMPTS[data.style]}. ${data.prompt ? `Subject details: ${data.prompt}` : ""}`;
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
