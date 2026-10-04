@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Architecture rules
+- Generation runs via the `generateFromSketch` server function (AI gateway) unless `VITE_RENDER_API_URL` is set, then the client calls that external Python/OpenCV backend's `/api/generate` — keeps the app working with or without the external backend.
+- Generation history lives in browser localStorage (no accounts) — keeps the app login-free.
